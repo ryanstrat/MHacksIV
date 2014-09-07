@@ -31,7 +31,7 @@ $(document).ready(function () {
     var turmoil = $("#turmoil").val();
     
     var slider = $("#slider").val();
-    $("#slider").val(slider + turmoil * 5)
+    $("#slider").val(slider + (turmoil * 5));
     
     
     
