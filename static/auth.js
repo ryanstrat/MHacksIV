@@ -29,13 +29,13 @@ var authClient = new FirebaseSimpleLogin(ref, function(error, user) {
 
 function authGoogle(){
     authClient.logout();
-    authClient.login('google');
+    setTimeout(authClient.login, 2000, 'google');
 
 }
 
 function authFacebook(){
     authClient.logout();
-    authClient.login('facebook');
+    setTimeout(authClient.login, 2000, 'facebook');
 
 }
 
