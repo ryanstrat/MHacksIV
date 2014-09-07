@@ -15,11 +15,13 @@ def index():
 @app.route('/dashboard/', methods = ['GET'])
 def sentiment():
     vars = request.args.items()
-    googpred=pred(getGoogleData(vars('google')))
+    googpred=pred(getGoogleData(vars[0]))
     print googpred
-    fbpred=pred(getFBMSG(vars('facebook')))
+    fbpred=pred(getFBMSG(vars[1]))
     print fbpred
     jso=json.dumps({"google":googpred,"facebook":fbpred})
-    return render_template(jso)
+    return jso
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=80)
