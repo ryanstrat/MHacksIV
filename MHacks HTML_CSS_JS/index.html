@@ -6,6 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Centiment</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="icon" type="image/gif" href="animated_favicon1.gif">
 
 	<!-- CSS -->
 	<link href="reset.css" rel="stylesheet">
@@ -15,15 +17,17 @@
 </head>
 
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/chart.js"></script>
-    <script src="js/dashboard.js"></script>
-    
-    
 	<div id="nav_container">
 		<header>
 			<img src="img/logo%20white.png" height="35px">
 		</header>
+	</div>
+	<div class="container">
+		<div class="section group" id="announcement">
+			<div class="col span_4_of_5">We've changed your portfolio recently based on your sentiment!</div>
+			<div class="col span_1_of_5 right"><a href="" id="closeAnnouncement">x</a>
+			</div>
+		</div>
 	</div>
 	<div class="container">
 		<div class="section group" id="content">
@@ -48,27 +52,33 @@
 			<div class="col span_3_of_3" id="nav">
 				<a href="" class="active" id="investLink">Investments</a> &nbsp; <a href="" id="sentimentLink">Sentiment</a>
 			</div>
-			<div id="investmentTab" class="slide">
+
+
+			<div id="investmentTab">
 				<div class="col span_3_of_3">
 					<subhead>Your investments</subhead>
 					<p id="subhead">Currently, your portfolio is&nbsp;
-						<stock>70% stocks</stock>&nbsp; and&nbsp;
-						<bond>30% bonds</bond>.
+						<stock id="stockVal">50</stock>
+						<stock>% stocks</stock>
+						&nbsp;and&nbsp;
+						<bond id="bondVal">50</bond>
+						<bond>% bonds</bond>.
 					</p>
-					<p>&nbsp;</p>
 				</div>
 
 				<div class="section group" id="content">
 					<div class="col span_2_of_5">
-                        <canvas id="pieChart" width="400" height="400"></canvas>
+						<div id="canvas">
+							<canvas id="pieChart"></canvas>
+						</div>
 					</div>
-					<div class="col span_3_of_5">
+					<div class="col span_3_of_5" id="proGrow">
 						<div class="col span_1_of_2">
 							<subhead1>Projected growth</subhead1>
 						</div>
-						<div class="col span_1_of_2" id="right">
+						<div class="col span_1_of_2 right">
 							<p class="value">+
-								<output type="text" id="value" value="">117</output>%</p>
+								<output type="text" id="value" value="">50</output>%</p>
 						</div>
 						<div class="section group">
 							<div class="col span_2_of_2">
@@ -77,19 +87,22 @@
 								</subtitle>
 							</div>
 						</div>
-						<input type="range" min="50" max="150" value="117" onchange="updateTextInput(this.value);" />
+
+						<!-- Slider -->
+						<input type="range" min="0" max="100" value="50" id="slider" />
 						<div class="section group">
 							<div class="col span_1_of_2">
 								<p class="sliderLabel" id="conservative">Conservative</p>
 							</div>
-							<div class="col span_1_of_2" id="right">
-								<p class="sliderLabel" id="risky">Risky</p>
+							<div class="col span_1_of_2">
+								<p class="sliderLabel right" id="risky">Risky</p>
 							</div>
 						</div>
+
 						<div class="section group">
 							<div class="col span_1_of_2">
 								<br />
-								<blue>July 2014</blue>&nbsp;to
+								<blue>July 2014</blue>&nbsp;&nbsp;to&nbsp;
 								<blue>Now</blue>
 							</div>
 							<div class="section group">
@@ -97,21 +110,60 @@
 									<table>
 										<tr>
 											<td class="label">Invested</td>
-											<td id="right" class="data">$90,000.00</td>
+											<td class="right data">$90,000.00</td>
 										</tr>
 										<tr>
 											<td class="label">Earned</td>
-											<td id="right" class="data">$10,000.00</td>
+											<td class="right data">$10,000.00</td>
 										</tr>
 									</table>
 								</div>
 							</div>
 						</div>
 					</div>
+
+					<div class="col span_3_of_5 hidden" id="breakdown">
+						<div class="section group">
+							<div class="col span_2_of_3">
+								<subhead1 id="stockOrBond">Hello</subhead1>
+							</div>
+							<div class="col span_1_of_3 right">
+								<a href="" id="close">x</a>
+							</div>
+						</div>
+						<br />
+						<table>
+							<tr class="top">
+								<td class="label">Name</td>
+								<td class="label right">Value per share</td>
+								<td class="label right">% of portfolio</td>
+							</tr>
+							<tr class="up">
+								<td>ABC</td>
+								<td class="right data">$100.00</td>
+								<td class="right">3.00%</td>
+							</tr>
+							<tr class="down">
+								<td>BCD</td>
+								<td class="right data">$20.00</td>
+								<td class="right">5.00%</td>
+							</tr>
+							<tr class="up">
+								<td>CDE</td>
+								<td class="right data">$50.00</td>
+								<td class="right">10.00%</td>
+							</tr>
+							<tr class="up">
+								<td>DEF</td>
+								<td class="right data">$45.00</td>
+								<td class="right">20.00%</td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 
-			<div id="sentimentTab" class="slide">
+			<div id="sentimentTab">
 				<div class="col span_3_of_3">
 					<subhead>Your sentiment</subhead>
 					<p id="subhead">
@@ -121,20 +173,19 @@
 					</p>
 				</div>
 				<div class="section group" id="content">
-					<div class="col span_2_of_5">
-                        <canvas id="lineChart" width="400" height="400"></canvas>
+					<div class="col span_5_of_5">
+						<canvas id="lineChart"></canvas>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<script type="text/javascript">
-		function updateTextInput(val) {
-			document.getElementById('value').value = val;
-		}
-	</script>
-	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script src=" js/jquery.min.js "></script>
+	<script src="js/jquery-ui.min.js "></script>
+	<script src="js/chart.js "></script>
+	<script src="js/dashboard.js "></script>
+	<script src="js/script.js "></script>
 </body>
 
 </html>
