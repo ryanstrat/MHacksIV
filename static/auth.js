@@ -10,7 +10,6 @@ var authClient = new FirebaseSimpleLogin(ref, function(error, user) {
         console.log("User ID: " + user.uid + ", Provider: " + user.provider);
         if(user.provider == 'google') {
             googleKey = user.accessToken;
-            authClient.logout();
             if(null == facebookKey) {
                 authFacebook();
             }
@@ -20,17 +19,22 @@ var authClient = new FirebaseSimpleLogin(ref, function(error, user) {
                 authGoogle();
             }
         }
-    } else {
-        
+        if (googleKey != null and facebookKey != null) {
+            //lookup table
+            loggedIn();
+        }
     }
+    
 });
 
 function authGoogle(){
+    authClient.logout();
     authClient.login('google');
 
 }
 
 function authFacebook(){
+    authClient.logout();
     authClient.login('facebook');
 
 }
