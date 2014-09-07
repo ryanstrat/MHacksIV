@@ -1,0 +1,48 @@
+
+body {
+		font-family: 'maison_neuemedium', Helvetica, sans-serif;
+	font-size: 20px;
+	background-color: #2FC4AF;
+	font-color: #fff;
+	padding: 40px;
+}
+
+#center {
+	position: relative;
+	top: 200px;
+	display: block;
+	margin: 0px auto;
+}
+
+
+
+#container {
+	position: relative;
+	top: 50%;
+}
+
+.button {
+	border: 0px;
+	text-align: center;
+	border-radius: 5px;
+	padding: 20px 60px;
+	font-family: 'maison_neuebold';
+	font-size: 28px;
+	color: #2FC4AF;
+	background-color: #fff;
+	display: inline-block;
+}
+
+
+#spacer {
+	height: 50px;
+}
+
+#buttons {
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	top: 400px;
+}
