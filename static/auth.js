@@ -51,6 +51,6 @@ function loggedIn(){
 $(document).ready(function(){
     console.log("signing in");
     $("#logIn").click(function(){
-        authGoogle();
+        authFacebook();
     });
 });
