@@ -15,6 +15,11 @@
 </head>
 
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+    
+    
 	<div id="nav_container">
 		<header>
 			<img src="img/logo%20white.png" height="35px">
@@ -43,7 +48,7 @@
 			<div class="col span_3_of_3" id="nav">
 				<a href="" class="active" id="investLink">Investments</a> &nbsp; <a href="" id="sentimentLink">Sentiment</a>
 			</div>
-			<div id="investmentTab">
+			<div id="investmentTab" class="slide">
 				<div class="col span_3_of_3">
 					<subhead>Your investments</subhead>
 					<p id="subhead">Currently, your portfolio is&nbsp;
@@ -55,7 +60,7 @@
 
 				<div class="section group" id="content">
 					<div class="col span_2_of_5">
-						moo
+                        <canvas id="pieChart" width="400" height="400"></canvas>
 					</div>
 					<div class="col span_3_of_5">
 						<div class="col span_1_of_2">
@@ -106,7 +111,7 @@
 				</div>
 			</div>
 
-			<div id="sentimentTab">
+			<div id="sentimentTab" class="slide">
 				<div class="col span_3_of_3">
 					<subhead>Your sentiment</subhead>
 					<p id="subhead">
@@ -117,7 +122,7 @@
 				</div>
 				<div class="section group" id="content">
 					<div class="col span_2_of_5">
-						moo
+                        <canvas id="lineChart" width="400" height="400"></canvas>
 					</div>
 				</div>
 			</div>
