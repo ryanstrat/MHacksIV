@@ -27,4 +27,12 @@ $(document).ready(function () {
 		$("#breakdown").addClass("hidden");
 	});
 
+    
+    var turmoil = $("#turmoil").val();
+    
+    var slider = $("#slider").val();
+    $("#slider").val(slider + turmoil * 5)
+    
+    
+    
 });
