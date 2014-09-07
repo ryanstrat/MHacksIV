@@ -4,6 +4,7 @@ from predict import getGoogleData
 from predict import getFBMSG
 from predict import pred
 import json
+import bloomberg
 from flask import render_template
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -15,13 +16,11 @@ def index():
 @app.route('/dashboard/', methods = ['GET'])
 def sentiment():
     vars = request.args.items()
-    googpred=pred(getGoogleData(vars[0]))
+    googpred=pred(getGoogleData('ya29.eQCnabTuxqmxPBwAAAB2AZe6wAdMBSKEvMO7GjvKRuSQsfpiJz2KrnWFA_KnCg','my-user-agent/1.0'))
     print googpred
-    fbpred=pred(getFBMSG(vars[1]))
+    fbpred=pred(getFBMSG('a10cf4775b52e5412537f495696b3a15'))
     print fbpred
     jso=json.dumps({"google":googpred,"facebook":fbpred})
-    return jso
-
-
+    return render_template(jso)
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=80)
