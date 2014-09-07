@@ -19,7 +19,7 @@ var authClient = new FirebaseSimpleLogin(ref, function(error, user) {
                 authGoogle();
             }
         }
-        if (googleKey != null and facebookKey != null) {
+        if (googleKey != null && facebookKey != null) {
             //lookup table
             loggedIn();
         }
