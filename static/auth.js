@@ -1,5 +1,4 @@
 var googleKey = null;
-var facebookKey = null;
 
 
 var ref = new Firebase("https://torid-heat-3815.firebaseio.com/");
@@ -10,19 +9,9 @@ var authClient = new FirebaseSimpleLogin(ref, function(error, user) {
         console.log("User ID: " + user.uid + ", Provider: " + user.provider);
         if(user.provider == 'google') {
             googleKey = user.accessToken;
-            if(null == facebookKey) {
-                authFacebook();
-            }
-        } else {
-            facebookKey = user.accessToken;
-            if(null === googleKey) {
-                authGoogle();
-            }
+            authFacebook();
         }
-        if (googleKey != null and facebookKey != null) {
-            //lookup table
-            loggedIn();
-        }
+        loggedIn()
     }
     
 });
@@ -35,22 +24,14 @@ function authGoogle(){
 
 }
 
-function authFacebook(){
-    authClient.logout();
-    setTimeout(function() {
-        authClient.login('facebook');
-    }, 2000);
-
-}
-
 function loggedIn(){
-    var url = sprintf("http://centiment.me/dashboard?google=%s&facebook=%s", googleKey, facebookKey);
+    var url = sprintf("http://centiment.me/dashboard?google=%s", googleKey);
     window.location.replace(url);
 }
 
 $(document).ready(function(){
     console.log("signing in");
     $("#logIn").click(function(){
-        authFacebook();
+        authGoogle();
     });
 });
