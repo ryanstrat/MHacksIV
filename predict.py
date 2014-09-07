@@ -17,7 +17,25 @@ from oauth2client.tools import run
 from oauth2client.client import AccessTokenCredentials
 
 import base64
-
+from facepy import GraphAPI
+def getFBMSG():
+    client = GraphAPI('CAACEdEose0cBADs8BNiWmJEt0Cj9rnVEx2KJPtcerxSysPjlsC92asLwI2tITSv1OcIvtnBR0eKkSYnpsA2QbA2FbsmCRJio9ZBZAS4XqNZAl1sHNtbS2mgohbe18sI3bnJRDwZB6hCoJlyKYqewHmoXxSOJl8BV59PubpJZBzGzBJoqO25J4Ucf1Q0dGOto8wjNeZAjeYD3u1tBwwRpTr')
+    user = client.get('me')
+    user_id = user['id']
+    messages = client.get('me/inbox')
+    threads = messages['data']
+    message_bodies = []
+    for thread in threads:
+        try:
+            messages = thread['comments']['data']
+            for message in messages:
+                person_from = message['from']['id']
+                body = message['message']
+                if (person_from==user_id):
+                    message_bodies.append(body)
+        except:
+            pass
+    return message_bodies
 pickle_file = open('data.pkl', 'rb')
 model = pickle.load(pickle_file)
 
@@ -36,7 +54,7 @@ def getData():
     http = httplib2.Http()
 
     # Try to retrieve credentials from storage or run the flow to generate them
-    credentials = AccessTokenCredentials('ya29.eADkzTlxEbmmIxwAAABAG7yCzis91ymr0ZVRb7xOT7pf_SfmnNOZCFNIGabLiA', 'my-user-agent/1.0')
+    credentials = AccessTokenCredentials('ya29.eQCYV2IJHx8l7BwAAACnjA3plEdZC9RMoCpW38b-yp3YEgJvbYJ3SbEgX9CVAg','my-user-agent/1.0')
     if credentials is None or credentials.invalid:
         credentials = run(flow, STORAGE, http=http)
 
@@ -59,6 +77,6 @@ def getData():
         datas.append(data['snippet'])
     print datas
     return datas
-data  = getData()
+data  = getData()+getFBMSG()[0:1]
 predict = model.predict(data)
 print predict
