@@ -1,5 +1,5 @@
-var googleKey;
-var facebookKey;
+var googleKey = null;
+var facebookKey = null;
 
 
 var ref = new Firebase("https://torid-heat-3815.firebaseio.com/");
@@ -8,14 +8,15 @@ var authClient = new FirebaseSimpleLogin(ref, function(error, user) {
         console.log(error);
     } else if (user) {
         console.log("User ID: " + user.uid + ", Provider: " + user.provider);
-        if(authClient.provider == 'google') {
+        if(user.provider == 'google') {
             googleKey = user.accessToken;
-            if(isnull(facebookKey)) {
+            authClient.logout();
+            if(null == facebookKey) {
                 authFacebook();
             }
         } else {
             facebookKey = user.accessToken;
-            if(isnull(googleKey)) {
+            if(null === googleKey) {
                 authGoogle();
             }
         }
