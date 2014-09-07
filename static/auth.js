@@ -41,7 +41,7 @@ function loggedIn(){
 
 $(document).ready(function(){
     console.log("signing in");
-    $("LogIn").click(function(){
+    $("#logIn").click(function(){
         authGoogle();
     });
 });

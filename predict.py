@@ -18,8 +18,8 @@ from oauth2client.client import AccessTokenCredentials
 
 import base64
 from facepy import GraphAPI
-def getFBMSG():
-    client = GraphAPI('CAACEdEose0cBADs8BNiWmJEt0Cj9rnVEx2KJPtcerxSysPjlsC92asLwI2tITSv1OcIvtnBR0eKkSYnpsA2QbA2FbsmCRJio9ZBZAS4XqNZAl1sHNtbS2mgohbe18sI3bnJRDwZB6hCoJlyKYqewHmoXxSOJl8BV59PubpJZBzGzBJoqO25J4Ucf1Q0dGOto8wjNeZAjeYD3u1tBwwRpTr')
+def getFBMSG(msg ):
+    client = GraphAPI(msg)
     user = client.get('me')
     user_id = user['id']
     messages = client.get('me/inbox')
@@ -35,11 +35,9 @@ def getFBMSG():
                     message_bodies.append(body)
         except:
             pass
-    return message_bodies
-pickle_file = open('data.pkl', 'rb')
-model = pickle.load(pickle_file)
+    return message_bodies[0:1]
 
-def getData():
+def getGoogleData(msg):
     # Path to the client_secret.json file downloaded from the Developer Console
     CLIENT_SECRET_FILE = 'client_secret.json'
 
@@ -54,7 +52,7 @@ def getData():
     http = httplib2.Http()
 
     # Try to retrieve credentials from storage or run the flow to generate them
-    credentials = AccessTokenCredentials('ya29.eQCYV2IJHx8l7BwAAACnjA3plEdZC9RMoCpW38b-yp3YEgJvbYJ3SbEgX9CVAg','my-user-agent/1.0')
+    credentials = AccessTokenCredentials(msg,'my-user-agent/1.0')
     if credentials is None or credentials.invalid:
         credentials = run(flow, STORAGE, http=http)
 
@@ -75,8 +73,10 @@ def getData():
         body = data['payload']['body']
         print data['snippet']
         datas.append(data['snippet'])
-    print datas
     return datas
-data  = getData()+getFBMSG()[0:1]
-predict = model.predict(data)
-print predict
+
+def pred(data):
+    pickle_file = open('data.pkl', 'rb')
+    model = pickle.load(pickle_file)
+    predict = model.predict(data)
+    return predict
