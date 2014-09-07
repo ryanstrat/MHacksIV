@@ -1,6 +1,15 @@
+{
 "username":"gburdell",
+"name":"George Burdell",
 "risk-rating":"50",
+"risk-history":"",
 "investments":[
     {"name":"Vanguard Total",
-     "value":"
-]
+     "value":1500,
+     "category":"stock"
+    },
+    {"name":"Vanguard Bonds",
+     "value":450,
+     "category":"bond"
+    }]
+}
